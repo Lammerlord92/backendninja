@@ -5,3 +5,4 @@
 banner:
   #classpath es src/main/resources, actualmente puesto en valor por defecto
   location: classpath:banner.txt 
+ 
