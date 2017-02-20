@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.udemy.domain.Person;
+
 @Controller
 @RequestMapping("/example")
 public class ExampleController {
@@ -16,14 +18,14 @@ public class ExampleController {
 	//@GetMapping("/exampleString") hace lo mismo que la de abajo, se usa para no repetir
 	@RequestMapping(value="/exampleString", method=RequestMethod.GET)
 	public String exampleString(Model model){
-		model.addAttribute("name", "Jon");
+		model.addAttribute("person", new Person("John", 23));
 		return EXAMPLE_VIEW;
 	}
 	//Segunda forma
 	@RequestMapping(value="/exampleMAV", method=RequestMethod.GET)
 	public ModelAndView exampleMAV(){
 		ModelAndView mav=new ModelAndView(EXAMPLE_VIEW);
-		mav.addObject("name", "Mike");
+		mav.addObject("person", new Person("Mike", 30));
 		return mav;
 	}
 }
