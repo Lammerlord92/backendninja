@@ -1,0 +1,7 @@
+# Fichero que modifica las propiedades de la plantilla
+#https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+#Se usa en vez de application.properties
+# BANNER
+banner:
+  #classpath es src/main/resources, actualmente puesto en valor por defecto
+  location: classpath:banner.txt 
