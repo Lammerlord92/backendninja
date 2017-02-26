@@ -3,12 +3,15 @@ package com.udemy.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.udemy.components.ExampleComponent;
 import com.udemy.domain.Person;
 
 @Controller
@@ -17,10 +20,15 @@ public class ExampleController {
 	
 	public static final String EXAMPLE_VIEW="example";
 	
+	@Autowired
+	@Qualifier("exampleComponent")	//Nombre del bean
+	private ExampleComponent exampleComponent;
+	
 	//Primera forma
 	//@GetMapping("/exampleString") hace lo mismo que la de abajo, se usa para no repetir
 	@RequestMapping(value="/exampleString", method=RequestMethod.GET)
 	public String exampleString(Model model){
+		exampleComponent.sayHello();
 		model.addAttribute("people", getPeople());
 		return EXAMPLE_VIEW;
 	}
@@ -32,7 +40,7 @@ public class ExampleController {
 		return mav;
 	}
 	
-	private List<Person> getPeople(){
+	private List<Person> getPeople(){		
 		List<Person> people= new ArrayList<Person>();
 		
 		people.add(new Person("John", 23));
