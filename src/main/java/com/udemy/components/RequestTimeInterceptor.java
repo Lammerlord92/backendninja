@@ -1,0 +1,33 @@
+package com.udemy.components;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+
+@Component("requestTimeInterceptor")
+public class RequestTimeInterceptor extends HandlerInterceptorAdapter{
+	
+	private static final Log LOG=LogFactory.getLog(RequestTimeInterceptor.class);
+
+	@Override//Se ejecuta antes de entrar al método del controlador, va 1º
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+			throws Exception {
+		// TODO Auto-generated method stub
+		request.setAttribute("startTime", System.currentTimeMillis());
+		return true;
+	}
+	
+	@Override//Se ejecuta antes de pintar la vista en el navegador, va 2º
+	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
+			throws Exception {
+		long startTime=(long) request.getAttribute("startTime");
+		LOG.info("--REQUEST URL: "+ request.getRequestURL()+" -- TOTAL TIME: '"+(System.currentTimeMillis()-startTime)+"'ms");
+	}
+
+
+
+}
