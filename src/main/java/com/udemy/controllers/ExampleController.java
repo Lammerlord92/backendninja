@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.udemy.components.ExampleComponent;
 import com.udemy.domain.Person;
+import com.udemy.services.ExampleService;
 
 @Controller
 @RequestMapping("/example")
@@ -23,31 +24,24 @@ public class ExampleController {
 	@Autowired
 	@Qualifier("exampleComponent")	//Nombre del bean
 	private ExampleComponent exampleComponent;
+	@Autowired
+	@Qualifier("exampleService")	//Nombre del bean
+	private ExampleService exampleSevice; //LLamamos a la interfaz
 	
 	//Primera forma
 	//@GetMapping("/exampleString") hace lo mismo que la de abajo, se usa para no repetir
 	@RequestMapping(value="/exampleString", method=RequestMethod.GET)
 	public String exampleString(Model model){
 		exampleComponent.sayHello();
-		model.addAttribute("people", getPeople());
+		model.addAttribute("people", exampleSevice.getListPeople());
 		return EXAMPLE_VIEW;
 	}
 	//Segunda forma
 	@RequestMapping(value="/exampleMAV", method=RequestMethod.GET)
 	public ModelAndView exampleMAV(){
 		ModelAndView mav=new ModelAndView(EXAMPLE_VIEW);
-		mav.addObject("people", getPeople());
+		mav.addObject("people", exampleSevice.getListPeople());
 		return mav;
 	}
 	
-	private List<Person> getPeople(){		
-		List<Person> people= new ArrayList<Person>();
-		
-		people.add(new Person("John", 23));
-		people.add(new Person("Mike", 30));
-		people.add(new Person("Eva", 40));
-		people.add(new Person("Peter", 19));
-		
-		return people;
-	}
 }
