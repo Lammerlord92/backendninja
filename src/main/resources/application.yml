@@ -10,3 +10,22 @@ server:
   error:
     whitelabel:
       enabled: true
+      
+spring:
+ #Indican los datos que permite a spring manejarse con la base de datos
+  datasource:
+    url: jdbc:mysql://localhost:3306/mydb
+    username: root
+    password: hsbyh1992_SPN
+  jpa:
+    #Muestra SQL en el log cuando se hagan las consultas
+    show-sql: true
+    hibernate:
+      #Comprueba que las entidades se correspondan con las tablas de la bd. Si no se corresponde, actualiza las tablas de BBDD
+      ddl-auto: update
+      naming:
+        strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect 
+    
