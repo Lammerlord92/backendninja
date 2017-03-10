@@ -22,7 +22,7 @@ public class CourseServiceImpl implements CourseService{
 	}
 
 	@Override
-	public Course createCourse(Course course) {
+	public Course saveCourse(Course course) {
 		return courseJPARepository.save(course);
 	}
 
