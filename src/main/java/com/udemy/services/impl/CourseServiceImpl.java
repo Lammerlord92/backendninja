@@ -2,6 +2,8 @@ package com.udemy.services.impl;
 
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -16,13 +18,18 @@ public class CourseServiceImpl implements CourseService{
 	@Qualifier("courseJPARepository")
 	private CourseJPARepository courseJPARepository;
 	
+	private static final Log LOG =LogFactory.getLog(CourseServiceImpl.class);
+
+	
 	@Override
 	public List<Course> findAll() {
+		LOG.info("Call: "+"listAllCourses()");
 		return courseJPARepository.findAll();
 	}
 
 	@Override
 	public Course saveCourse(Course course) {
+		LOG.info("Call: "+"saveCourse()");
 		return courseJPARepository.save(course);
 	}
 
