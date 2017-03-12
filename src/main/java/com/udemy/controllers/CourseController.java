@@ -33,14 +33,16 @@ public class CourseController {
 	public ModelAndView listAllCourses(){
 		LOG.info("Call: listAllCourses()");
 		ModelAndView res=new ModelAndView(COURSES_VIEW);
+		//Para el formulario
+		res.addObject("course", new Course());
 		res.addObject("courses", courseService.findAll());
 		return res;
 	}
 	
-	@PostMapping("/addCourse")
+	@PostMapping("/addcourse")
 	public String addCourse(@ModelAttribute("course") Course course){
 		LOG.info("Call: addCourse() "+ "-- PARAM --> "+course.toString());
 		courseService.saveCourse(course);
-		return "redirect:/courses/listcourses";
+		return "redirect:listcourses";
 	}
 }
