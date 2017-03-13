@@ -28,6 +28,12 @@ public class CourseServiceImpl implements CourseService{
 	}
 
 	@Override
+	public Course getCourse(int id) {
+		Course res=courseJPARepository.findOne(id);
+		return res;
+	}
+
+	@Override
 	public Course saveCourse(Course course) {
 		LOG.info("Call: "+"saveCourse()");
 		return courseJPARepository.save(course);

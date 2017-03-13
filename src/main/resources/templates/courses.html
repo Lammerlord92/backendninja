@@ -8,6 +8,7 @@
 	<table>
 		<thead>
 			<tr>
+				<th>Actions</th>
 				<th>Name</th>
 				<th>Description</th>
 				<th>Price</th>
@@ -16,6 +17,8 @@
 		</thead>
 		<tbody>
 			<tr th:each="course : ${courses}">
+				<td><a href="#" th:href="@{/courses/delete(id=${course.id})}">Delete</a> 
+				<a href="#" th:href="@{/courses/editcourse(id=${course.id})}">Edit</a></td>
 				<td><span th:text="${course.name}"></span></td>
 				<td><span th:text="${course.description}"></span></td>
 				<td><span th:text="${course.price}"></span></td>
